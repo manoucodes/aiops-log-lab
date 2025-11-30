@@ -12,5 +12,5 @@ BGL_RAW_DIR = RAW_DIR / "bgl"
 HDFS_PARSED_DIR = PARSED_DIR / "hdfs"
 BGL_PARSED_DIR = PARSED_DIR / "bgl"
 
-HDFS_LOG_FORMAT = ""
+HDFS_LOG_FORMAT = "<Date> <Time> <Pid> <Level> <Component>: <Content>"
 BGL_LOG_FORMAT = ""
