@@ -37,12 +37,14 @@ def main():
     df["Timestamp"] = df["Date"].astype(str) + df["Time"].astype(str)
     df = df.sort_values(["BlockId", "Timestamp"])
 
-    seqs = (
-        df.groupby("BlockId")["EventId"]
-          .apply(list)
-          .reset_index()
-          .rename(columns={"EventId": "EventSequence"})
-    )
+    # séquence + timestamp de bloc
+    grouped = df.groupby("BlockId")
+    seqs = grouped["EventId"].apply(list).reset_index().rename(columns={"EventId": "EventSequence"})
+
+    # on prend le premier timestamp pour le bloc
+    block_ts = grouped["Timestamp"].min().reset_index().rename(columns={"Timestamp": "BlockTimestamp"})
+
+    seqs = seqs.merge(block_ts, on="BlockId")
 
     print("Nombre de BlockId (séquences) :", seqs.shape[0])
 
