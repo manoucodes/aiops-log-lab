@@ -24,24 +24,27 @@ def extract_block_id(row):
 
 def main():
     df = pd.read_csv(STRUCTURED_FILE)
+    print("Lignes totales dans structured :", df.shape[0])
 
-    # extraire block_id
     df["BlockId"] = df.apply(extract_block_id, axis=1)
 
-    # virer les lignes sans block_id
-    df = df.dropna(subset=["BlockId"])
+    nb_missing = df["BlockId"].isna().sum()
+    print("Lignes sans BlockId :", nb_missing)
 
-    # construire un timestamp sortable (option simple : concat Date + Time)
+    df = df.dropna(subset=["BlockId"])
+    print("Lignes avec BlockId :", df.shape[0])
+
     df["Timestamp"] = df["Date"].astype(str) + df["Time"].astype(str)
     df = df.sort_values(["BlockId", "Timestamp"])
 
-    # séquence d’EventId par bloc
     seqs = (
         df.groupby("BlockId")["EventId"]
           .apply(list)
           .reset_index()
           .rename(columns={"EventId": "EventSequence"})
     )
+
+    print("Nombre de BlockId (séquences) :", seqs.shape[0])
 
     SEQUENCES_FILE.parent.mkdir(parents=True, exist_ok=True)
     seqs.to_csv(SEQUENCES_FILE, index=False)
