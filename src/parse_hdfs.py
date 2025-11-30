@@ -8,8 +8,7 @@ LOG_FILE_NAME = "HDFS.log"  # à adapter au vrai nom du fichier LogHub
 REX = [
     r'(\d+\.){3}\d+:\d+',   # IP:port
     r'(\d+\.){3}\d+',       # IP seule
-    r'blk_-?\d+',          # block id
-    r'of size \d+'            # block id
+    r'blk_-?\d+'          # block id
 ]
 
 def main():
