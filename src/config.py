@@ -3,10 +3,13 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 DATA_DIR = PROJECT_ROOT / "data"
+MODEL_DIR = PROJECT_ROOT / "model"
 RAW_DIR = DATA_DIR / "raw"
 PARSED_DIR = DATA_DIR / "parsed"
 SEQUENCE_DIR = DATA_DIR / "sequences"
 FEATURE_DIR = DATA_DIR / "features"
+
+HDFS_MODELS_DIR = MODEL_DIR / "hdfs"
 
 HDFS_RAW_DIR = RAW_DIR / "hdfs"
 BGL_RAW_DIR = RAW_DIR / "bgl"
@@ -21,4 +24,4 @@ HDFS_FEATURE_DIR = FEATURE_DIR / "hdfs"
 BGL_FEATURE_DIR = FEATURE_DIR / "bgl"
 
 HDFS_LOG_FORMAT = "<Date> <Time> <Pid> <Level> <Component>: <Content>"
-BGL_LOG_FORMAT = ""
+BGL_LOG_FORMAT = "<Type> <Epoch> <Date> <Host> <Datetime> <Content>"

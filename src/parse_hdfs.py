@@ -19,7 +19,7 @@ def main():
         outdir=str(HDFS_PARSED_DIR),
         log_format=HDFS_LOG_FORMAT,
         depth=4,      # profondeur de l'arbre Drain
-        st=0.5,       # seuil de similarité (tu pourras tuner après)
+        st=0.5,       # seuil de similarité
         rex=REX
     )
 
